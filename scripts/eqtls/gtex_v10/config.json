@@ -1,0 +1,193 @@
+{
+    "regions": ["Adipose_Subcutaneous",
+                "Adipose_Visceral_Omentum",
+                "Adrenal_Gland",
+                "Artery_Aorta",
+                "Artery_Coronary",
+                "Artery_Tibial",
+                "Bladder",
+                "Breast_Mammary_Tissue",
+                "Cells_Cultured_fibroblasts",
+                "Cells_EBV-transformed_lymphocytes",
+                "Colon_Sigmoid",
+                "Colon_Transverse",
+                "Esophagus_Gastroesophageal_Junction",
+                "Esophagus_Mucosa",
+                "Esophagus_Muscularis",
+                "Heart_Atrial_Appendage",
+                "Heart_Left_Ventricle",
+                "Kidney_Cortex",
+                "Liver",
+                "Lung",
+                "Minor_Salivary_Gland",
+                "Muscle_Skeletal",
+                "Nerve_Tibial",
+                "Ovary",
+                "Pancreas",
+                "Pituitary",
+                "Prostate",
+                "Skin_Not_Sun_Exposed_Suprapubic",
+                "Skin_Sun_Exposed_Lower_leg",
+                "Small_Intestine_Terminal_Ileum",
+                "Spleen",
+                "Stomach",
+                "Testis",
+                "Thyroid",
+                "Uterus",
+                "Vagina",
+                "Whole_Blood"
+            ],
+    "types": "eQTL",
+    "base_dir": "", #TODO: put in the directory where the *parquet files are
+    "dbsnp_dir": "", #TODO: put in the directory where the dbsnp files are
+    "Adipose_Subcutaneous" : {
+        "sample_size": "714"
+    },
+    "Adipose_Visceral_Omentum" : {
+        "sample_size": "587"
+    },
+    "Adrenal_Gland" : {
+        "sample_size": "295"
+    },
+    "Artery_Aorta" : {
+        "sample_size": "472"
+    },
+    "Artery_Coronary" : {
+        "sample_size": "268"
+    },
+    "Artery_Tibial" : {
+        "sample_size": "691"
+    },
+    "Bladder" : {
+        "sample_size": "77"
+    },
+    "Brain_Amygdala" : {
+        "sample_size": "181"
+    },
+    "Brain_Anterior_cingulate_cortex_BA24" : {
+        "sample_size": "233"
+    },
+    "Brain_Caudate_basal_ganglia" : {
+        "sample_size": "300"
+    },
+    "Brain_Cerebellar_Hemisphere" : {       
+        "sample_size": "277"
+    },
+    "Brain_Cerebellum" : {
+        "sample_size": "266"
+    },
+    "Brain_Cortex" : {
+        "sample_size": "270"
+    },
+    "Brain_Frontal_Cortex_BA9" : {
+        "sample_size": "269"
+    },
+    "Brain_Hippocampus" : {
+        "sample_size": "255"
+    },
+    "Brain_Hypothalamus" : {
+        "sample_size": "257"
+    },
+    "Brain_Nucleus_accumbens_basal_ganglia" : {
+        "sample_size": "285"
+    },
+    "Brain_Putamen_basal_ganglia" : {
+        "sample_size": "254"
+    },
+    "Brain_Spinal_cord_cervical_c-1" : {
+        "sample_size": "204"
+    },
+    "Brain_Substantia_nigra" : {
+        "sample_size": "183"
+    },
+    "Breast_Mammary_Tissue" : {
+        "sample_size": "514"
+    },
+    "Cells_Cultured_fibroblasts" : {
+        "sample_size": "652"
+    },
+    "Cells_EBV-transformed_lymphocytes" : {
+        "sample_size": "327"
+    },
+    "Colon_Sigmoid" : {
+        "sample_size": "419"
+    },
+    "Colon_Transverse" : {
+        "sample_size": "479"
+    },
+    "Esophagus_Gastroesophageal_Junction" : {
+        "sample_size": "403"
+    },
+    "Esophagus_Mucosa" : {
+        "sample_size": "614"
+    },
+    "Esophagus_Muscularis" : {
+        "sample_size": "561"
+    },
+    "Heart_Atrial_Appendage" : {
+        "sample_size": "461"
+    },
+    "Heart_Left_Ventricle" : {
+        "sample_size": "452"
+    },
+    "Kidney_Cortex" : {
+        "sample_size": "104"
+    },
+    "Liver" : {
+        "sample_size": "262"
+    },
+    "Lung" : {
+        "sample_size": "604"
+    },
+    "Minor_Salivary_Gland" : {
+        "sample_size": "181"
+    },
+    "Muscle_Skeletal" : {
+        "sample_size": "818"
+    },
+    "Nerve_Tibial" : {
+        "sample_size": "670"
+    },
+    "Ovary" : {
+        "sample_size": "193"
+    },
+    "Pancreas" : {
+        "sample_size": "362"
+    },
+    "Pituitary" : {
+        "sample_size": "313"
+    },
+    "Prostate" : {
+        "sample_size": "282"
+    },
+    "Skin_Not_Sun_Exposed_Suprapubic" : {
+        "sample_size": "651"
+    },
+    "Skin_Sun_Exposed_Lower_leg" : {
+        "sample_size": "754"
+    },
+    "Small_Intestine_Terminal_Ileum" : {
+        "sample_size": "207"
+    },
+    "Spleen" : {
+        "sample_size": "277"
+    },
+    "Stomach" : {
+        "sample_size": "407"
+    },
+    "Testis" : {
+        "sample_size": "414"
+    },
+    "Thyroid" : {
+        "sample_size": "684"
+    },
+    "Uterus" : {
+        "sample_size": "153"
+    },
+    "Vagina" : {
+        "sample_size": "170"
+    },
+    "Whole_Blood" : {
+        "sample_size": "803"
+    }
+}
