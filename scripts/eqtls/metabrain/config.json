@@ -1,0 +1,49 @@
+{
+    "base_dir": "QTL/eQTL/metabrain", #TODO: put in the correct path
+    "regions": [
+        "basalganglia",
+        "cerebellum",
+        "cortex",
+        "hippocampus",
+        "spinalcord"
+    ],
+    "chroms": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22"
+    ],
+    "basalganglia": {
+        "basename": "2021-07-23-basalganglia-EUR-30PCs"
+    },
+    "cerebellum": {
+        "basename": "2021-07-23-cerebellum-EUR-60PCs"
+    },
+    "cortex": {
+        "basename": "2021-07-23-cortex-EUR-80PCs"
+    },
+    "hippocampus": {
+        "basename": "2021-07-23-hippocampus-EUR-30PCs"
+    },
+    "spinalcord": {
+        "basename": "2021-07-23-spinalcord-EUR-20PCs"
+    }
+}

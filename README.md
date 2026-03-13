@@ -1,5 +1,8 @@
 # Purpose: 
 - This repository hosts scripts and readmes for processing of QTL datasets as part of the QTL Analysis module in FUMA and as part of Phung et al. 202x.
+- Document for: 
+    - processing of full summary statistics for implementation of coloc/LAVA analysis in QTLs analysis
+    - processing of significant variant-gene pairs for QTLs mapping
 
 # eQTLs
 ## gtex_v10
@@ -19,3 +22,31 @@
     ```
     snakemake -s process_gtexv10.smk -j --configfile config.json --rerun-incomplete --config chromosome="1"
     ```
+
+## metabrain
+### significant variant-gene pairs for qtl mapping
+- Fill out the form on https://www.metabrain.nl/cis-eqtls.html for getting access to download
+- Understand the data structure
+    - The file `*TopEffects.txt.gz` has the column PvalueNominalThreshold for each gene. Use this for filtering.
+
+    ```
+    zless 2021-07-23-basalganglia-EUR-30PCs-TopEffects.txt.gz | grep ENSG00000130538.5 | awk '{print$12"\t"$26"\t"$27}'
+    0.0181322749462725      0.000183932     0.524521572829835
+    ```
+    - So this means that the top snps for this gene has p value 0.0181322749462725
+    ```
+    zless 2021-07-23-basalganglia-EUR-30PCs-chr22.txt.gz | grep ENSG00000130538.5 | awk '{print$12}' | sort | head
+    0.01813227494627249
+    0.024551509867757382
+    0.02530276602259235
+    0.026172886246108203
+    0.02680128567007011
+    0.02719315015385728
+    0.027287265632118862
+    0.027787685454157954
+    0.03331884864620144
+    0.03456411981875567
+    ```
+- Processing steps: 
+    - snakemake script: `scripts/eqtls/metabrain/process_metabrain.smk`
+    - check script `scripts/eqtls/metabrain/run_process_metabrain.sh` for how to run the snakemake script and follow-up steps
