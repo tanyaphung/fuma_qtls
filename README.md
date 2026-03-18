@@ -4,6 +4,8 @@
     - processing of full summary statistics for implementation of coloc/LAVA analysis in QTLs analysis
     - processing of significant variant-gene pairs for QTLs mapping
 
+**NOTE THAT THIS REPO IS STILL IN DEVELOPMENT**
+
 # eQTLs
 ## gtex_v10
 - Data downloaded from Google cloud in January 2025 (link for download was accessed here: https://www.gtexportal.org/home/downloads/adult-gtex/qtl)
@@ -108,8 +110,23 @@ done
 ```
 
 - Processing steps:
-    - snakemake script: scripts/eqtls/metabrain/full_sumstats/process_metabrain.smk
-    - check script scripts/eqtls/metabrain/full_sumstats/run_process_metabrain.sh for how to run the snakemake script and follow-up steps
+    - snakemake script: `scripts/sceqtls/bryois2022Brain/full_sumstats/format_full_sumstat.smk`
+    - check script `scripts/sceqtls/bryois2022Brain/full_sumstats/run.sh` for how to run the snakemake script and follow-up steps
+
+## jerber2021Dopaminergic
+- Download data (eqtl_summary_stats.tar.gz) from: https://zenodo.org/records/4333872
+- Viewing one of the files:
+```
+feature_id      snp_id  p_value beta    beta_se empirical_feature_p_value       feature_chromosome      feature_start      feature_end     n_samples       n_e_samples     snp_chromosome  snp_position    assessed_allele    call_rate       maf     hwe_p
+ENSG00000225880 1_662622_G_A    1.7083567865864062e-07  0.5211826808015152      0.0996799714446961      -1.0       1       761586  762902  173     173     1       662622  A       1.0     0.08092485549132948     1.0
+ENSG00000187961 1_662622_G_A    0.05892174837573025     -0.16135667326680556    0.08542919251703184     -1.0       1       895967  901095  173     173     1       662622  A       1.0     0.08092485549132948     1.0
+```
+- Overview of processing steps: 
+    - Extract only relevant columns and prepare file for liftover
+    - Liftover from GRCh37 to GRCh38
+    - Format (get rsID, etc...)
+- snakemake script: ``
+- check script `` for how to run the snakemake script and follow-up steps
 
 ## singlebrain
 - Download the data from: https://zenodo.org/records/14908182

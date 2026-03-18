@@ -7,7 +7,7 @@ import tabix
 parser = argparse.ArgumentParser()
 parser.add_argument('-i', '--input', required=True)
 parser.add_argument('-o', '--output', required=True)
-parser.add_argument('--dbsnp_dir', help='directory containing dbSNP tabix files') #/gpfs/scratch1/nodespecific/int6/tphung/dbSNP_v157/grch38/
+parser.add_argument('--dbsnp_dir', help='directory containing dbSNP tabix files')
 parser.add_argument('--sample_size', required=True, help='Sample size.')
 parser.add_argument('--type', required=True, help='type of QTL: eQTL, sQTL, etc.')
 parser.add_argument('--chrom', required=True, help='Chromosome number.')
