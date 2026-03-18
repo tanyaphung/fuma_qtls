@@ -24,8 +24,10 @@
     ```
 
 ## metabrain
-### significant variant-gene pairs for qtl mapping
 - Fill out the form on https://www.metabrain.nl/cis-eqtls.html for getting access to download
+
+### significant variant-gene pairs for qtl mapping
+
 - Understand the data structure
     - The file `*TopEffects.txt.gz` has the column PvalueNominalThreshold for each gene. Use this for filtering.
 
@@ -48,5 +50,70 @@
     0.03456411981875567
     ```
 - Processing steps: 
-    - snakemake script: `scripts/eqtls/metabrain/process_metabrain.smk`
-    - check script `scripts/eqtls/metabrain/run_process_metabrain.sh` for how to run the snakemake script and follow-up steps
+    - snakemake script: `scripts/eqtls/metabrain/sig_pairs/process_metabrain.smk`
+    - check script `scripts/eqtls/metabrain/sig_pairs/run_process_metabrain.sh` for how to run the snakemake script and follow-up steps
+
+### full sumstat for coloc/LAVA
+- Processing steps: 
+    - snakemake script: `scripts/eqtls/metabrain/full_sumstats/process_metabrain.smk`
+    - check script `scripts/eqtls/metabrain/full_sumstats/run_process_metabrain.sh` for how to run the snakemake script and follow-up steps
+
+# sceQTLs (single-cell eQTLs)
+
+## bryois2022Brain
+- Download data from: https://zenodo.org/records/7276971
+- Data overview: 
+    - Columns: (1) Gene_id, (2) SNP_id, (3) Distance to TSS, (4) Nominal p-value, (5) Beta
+    ```
+    zless Astrocytes.22.gz | head
+    IL17RA_ENSG00000177663 rs112435201 -716044 0.607765 0.057825
+    IL17RA_ENSG00000177663 rs7287956 -715646 0.576995 0.0671856
+    IL17RA_ENSG00000177663 rs5748209 -715180 0.525675 0.074597
+    IL17RA_ENSG00000177663 rs5746874 -714392 0.425798 0.0935307
+    IL17RA_ENSG00000177663 rs5748581 -714261 0.473547 0.0857912
+    IL17RA_ENSG00000177663 rs9605127 -714156 0.554399 0.0964225
+    IL17RA_ENSG00000177663 rs5748583 -714128 0.889617 -0.012636
+    IL17RA_ENSG00000177663 rs5748589 -713977 0.437265 0.0913829
+    IL17RA_ENSG00000177663 rs5748596 -713944 0.430008 0.0925751
+    IL17RA_ENSG00000177663 rs78025685 -713718 0.464524 0.0857131
+    ```
+
+    - 
+    ```
+    zless snp_pos.txt.gz | head
+    SNP     SNP_id_hg38     SNP_id_hg19     effect_allele   other_allele    MAF
+    rs8179466       chr1:264562     chr1:234313     T       C       0.09635
+    rs6680723       chr1:598812     chr1:534192     T       C       0.2552
+    rs12025928      chr1:611317     chr1:546697     A       G       0.08947
+    rs12238997      chr1:758351     chr1:693731     G       A       0.1302
+    rs72631875      chr1:770502     chr1:705882     A       G       0.07552
+    rs12029736      chr1:770988     chr1:706368     A       G       0.487
+    rs116030099     chr1:787290     chr1:722670     C       T       0.09115
+    rs116587930     chr1:792461     chr1:727841     A       G       0.0625
+    rs4951859       chr1:794299     chr1:729679     C       G       0.1589
+    ```
+
+    - For the sample size, I will be using the total N_samples (postQC) from Table S1 of the article which is equal to 373.
+
+- Processing overview: 
+    - Preprocessing the file `snp_pos.txt.gz` for each chromosome
+    - Merge files `Astrocytes.22.gz` and `snp_pos_22.txt`
+
+- Preprocessing the file `snp_pos.txt.gz`
+```
+for i in {1..22}
+do
+python format_snp_pos.py ${i}
+done
+```
+
+- Processing steps:
+    - snakemake script: scripts/eqtls/metabrain/full_sumstats/process_metabrain.smk
+    - check script scripts/eqtls/metabrain/full_sumstats/run_process_metabrain.sh for how to run the snakemake script and follow-up steps
+
+## singlebrain
+- Download the data from: https://zenodo.org/records/14908182
+- The file does not have MAF. coloc can be implemented with beta and se (or slope and se) and sdY (and not MAF), but will need to modify the code a bit. Will save for later. Source: https://github.com/chr1swallace/coloc/issues/178
+### significant variant-gene pairs for qtl mapping
+### full sumstat for coloc/LAVA
+- Overview of the data: 
