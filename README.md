@@ -1,8 +1,34 @@
 # Purpose: 
-- This repository hosts scripts and readmes for processing of QTL datasets as part of the QTL Analysis module in FUMA and as part of Phung et al. 202x.
+- This repository hosts scripts and readmes for processing of QTL datasets for FUMA
 - Document for: 
-    - processing of full summary statistics for implementation of coloc/LAVA analysis in QTLs analysis
+    - processing of full summary statistics for implementation of coloc/LAVA analysis in the module QTLs analysis
     - processing of significant variant-gene pairs for QTLs mapping
+
+- For the full summary statistics, note the following: 
+    - The processed data contains the following columns in this particular order: 
+        - chr
+        - pos (in GRCh38)
+        - ref
+        - alt
+        - rsID
+        - gene/protein
+        - pval
+        - beta
+        - maf
+        - N
+    - Each chromosome is a separate file
+- For the significant variant-gene pairs for QTLs mapping, note the following: 
+    - The data contains the following columns in this order: 
+        - chr
+        - pos (in GRCh37)
+        - ref
+        - alt
+        - rsID
+        - gene symbol 
+        - cis/trans
+        - beta
+        - pval 
+    - In datasets where the authors provided the significant variant-gene pairs, those are used. Otherwise, in the case that the authors provided the full sumstat and without instructions for additional filtering to obtain the significant variant-gene pairs, only the variant-gene pairs with nominal p value < 0.05 are kept. For these datasets, it is only possible to run them with a p threshold specified by the users (default is less than 1e-3). 
 
 **NOTE THAT THIS REPO IS STILL IN DEVELOPMENT**
 
@@ -109,9 +135,13 @@ python format_snp_pos.py ${i}
 done
 ```
 
-- Processing steps:
+- Processing steps for full sumstats:
     - snakemake script: `scripts/sceqtls/bryois2022Brain/full_sumstats/format_full_sumstat.smk`
     - check script `scripts/sceqtls/bryois2022Brain/full_sumstats/run.sh` for how to run the snakemake script and follow-up steps
+
+- Processing steps for significant variant-gene pairs: 
+    - snakemake script: `scripts/sceqtls/bryois2022Brain/sig_pairs/process.smk`
+    - check script `scripts/sceqtls/bryois2022Brain/sig_pairs/run.sh` for how to run the snakemake script and follow-up steps
 
 ## jerber2021Dopaminergic
 - Download data (eqtl_summary_stats.tar.gz) from: https://zenodo.org/records/4333872
@@ -125,12 +155,18 @@ ENSG00000187961 1_662622_G_A    0.05892174837573025     -0.16135667326680556    
     - Extract only relevant columns and prepare file for liftover
     - Liftover from GRCh37 to GRCh38
     - Format (get rsID, etc...)
-- snakemake script: ``
-- check script `` for how to run the snakemake script and follow-up steps
+- snakemake script: `scripts/sceqtls/jerber2021Dopaminergic/full_sumstats/process.smk`
+- check script `scripts/sceqtls/jerber2021Dopaminergic/full_sumstats/run.sh` for how to run the snakemake script and follow-up steps
 
 ## singlebrain
 - Download the data from: https://zenodo.org/records/14908182
-- The file does not have MAF. coloc can be implemented with beta and se (or slope and se) and sdY (and not MAF), but will need to modify the code a bit. Will save for later. Source: https://github.com/chr1swallace/coloc/issues/178
+- The file does not have MAF. coloc can be implemented with beta and se (or slope and se) and sdY (and not MAF), but will need to modify the code a bit. Source: https://github.com/chr1swallace/coloc/issues/178
+    - Because the implementation of coloc without MAF requires some code change on the functionalities, this will be saved for FUMA releave version 2.0.x. 
+    - For intiial release of FUMA version 2.0.0, singlebrain datasets can only be run with LAVA. 
 ### significant variant-gene pairs for qtl mapping
-### full sumstat for coloc/LAVA
+### full sumstat for LAVA
 - Overview of the data: 
+    - coordinates in GRCh38
+
+- snakemake script: `scripts/sceqtls/singlebrain/full_sumstats/format.smk`
+- check script `` for how to run the snakemake script and follow-up steps
