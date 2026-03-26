@@ -34,22 +34,64 @@
 
 # eQTLs
 ## gtex_v10
+#### full_sumstats
 - Data downloaded from Google cloud in January 2025 (link for download was accessed here: https://www.gtexportal.org/home/downloads/adult-gtex/qtl)
-- The downloaded data is in `.parquet` format. Use script `scripts/eqtls/gtex_v10/format_parquet.py` which does the following: 
+- The downloaded data is in `.parquet` format. Use script `scripts/eqtls/gtex_v10/full_sumstats/format_parquet.py` which does the following: 
     - use pandas to read in the `.parquet` file and obtain these columns: `variant_id`, `gene_id`, `pval_nominal`, `slope`, `af`
         - assume that `variant_id` is in the chr:pos:ref:alt format
     - match the chr:pos:ref:alt based on dbSNP version 157 and get rsID. Rationale: 
         - if chr:pos:ref:alt matches with chr:pos:ref:alt from dbSNP, great. 
         - if chr:pos:ref:alt matches with chr:pos:alt:ref from dbSNP, swap the ref and alt in the eQLT file and assign beta to have the opposite sign (negative becomes positive and vice versa) and minor allele frequency becomes 1 - minor allele frequency
         - otherwise, the variant is skipped
-- After running the script `scripts/eqtls/gtex_v10/format_parquet.py`, sort based on position, bgzip and tabix
-- To run the whole pipeline, use a snakemake workflow in `scripts/eqtls/gtex_v10/process_gtexv10.smk`
-    - config file: `scripts/eqtls/gtex_v10/config.json`. Note that the directories on lines 41 and 42 have been removed. 
+- After running the script `scripts/eqtls/gtex_v10/full_sumstats/format_parquet.py`, sort based on position, bgzip and tabix
+- To run the whole pipeline, use a snakemake workflow in `scripts/eqtls/gtex_v10/full_sumstats/process_gtexv10.smk`
+    - config file: `scripts/eqtls/gtex_v10/full_sumstats/config.json`. Note that the directories on lines 41 and 42 have been removed. 
         - For the `dbsnp_dir`, please refer to https://github.com/tanyaphung/commonly_used_codes/tree/master/genome_assembly_conversion for how to process dbSNP files
     - Example on how to run for a chromosome
     ```
     snakemake -s process_gtexv10.smk -j --configfile config.json --rerun-incomplete --config chromosome="1"
     ```
+
+#### sig_pairs
+- Downloaded the file `GTEx_Analysis_v10_eQTL.tar` from https://www.gtexportal.org/home/downloads/adult-gtex/qtl, then untar
+    - There are 50 files ending in `*signif_pairs.parquet`, one file for each tissue
+- Verify that this file contains only the significant variant-gene pair association
+    - The p threshold is in the 30th column in the file `*eGenes.txt.gz`
+    ```
+    zless Heart_Left_Ventricle.v10.eGenes.txt.gz | head -n1 | awk '{print$30}'
+    pval_nominal_threshold
+    ```
+    - Find the p threshold for the gene ENSG00000227232.5
+    ```
+    zless Heart_Left_Ventricle.v10.eGenes.txt.gz | grep ENSG00000227232.5 | awk '{print$30}'
+    0.000285255
+    ```
+    - Now, extract the variant-gene pair associations from the file `*signif_pairs.parquet`
+    ```
+    import pandas as pd
+    data = pd.read_parquet("Heart_Left_Ventricle.v10.eQTLs.signif_pairs.parquet", engine='pyarrow', columns=['variant_id', 'gene_id', 'pval_nominal', 'slope', 'af'])
+    test = data[data["gene_id"]=="ENSG00000227232.5"]
+    test["pval_nominal"]<0.000285255
+    0     True
+    1     True
+    2     True
+    3     True
+    4     True
+    5     True
+    6     True
+    7     True
+    8     True
+    9     True
+    10    True
+    11    True
+    12    True
+    13    True
+    14    True
+    15    True
+    16    True
+    17    True
+    ```
+
 
 ## metabrain
 - Fill out the form on https://www.metabrain.nl/cis-eqtls.html for getting access to download
@@ -142,6 +184,7 @@ done
 - Processing steps for significant variant-gene pairs: 
     - snakemake script: `scripts/sceqtls/bryois2022Brain/sig_pairs/process.smk`
     - check script `scripts/sceqtls/bryois2022Brain/sig_pairs/run.sh` for how to run the snakemake script and follow-up steps
+    - rename `OPCs...COPs` to `OPCs`
 
 ## jerber2021Dopaminergic
 - Download data (eqtl_summary_stats.tar.gz) from: https://zenodo.org/records/4333872
