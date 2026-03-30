@@ -34,7 +34,7 @@
 
 # eQTLs
 ## gtex_v10
-#### full_sumstats
+### full_sumstats
 - Data downloaded from Google cloud in January 2025 (link for download was accessed here: https://www.gtexportal.org/home/downloads/adult-gtex/qtl)
 - The downloaded data is in `.parquet` format. Use script `scripts/eqtls/gtex_v10/full_sumstats/format_parquet.py` which does the following: 
     - use pandas to read in the `.parquet` file and obtain these columns: `variant_id`, `gene_id`, `pval_nominal`, `slope`, `af`
@@ -52,7 +52,7 @@
     snakemake -s process_gtexv10.smk -j --configfile config.json --rerun-incomplete --config chromosome="1"
     ```
 
-#### sig_pairs
+### sig_pairs
 - Downloaded the file `GTEx_Analysis_v10_eQTL.tar` from https://www.gtexportal.org/home/downloads/adult-gtex/qtl, then untar
     - There are 50 files ending in `*signif_pairs.parquet`, one file for each tissue
 - Verify that this file contains only the significant variant-gene pair association
@@ -96,7 +96,7 @@
 ## metabrain
 - Fill out the form on https://www.metabrain.nl/cis-eqtls.html for getting access to download
 
-### significant variant-gene pairs for qtl mapping
+### sig_pairs
 
 - Understand the data structure
     - The file `*TopEffects.txt.gz` has the column PvalueNominalThreshold for each gene. Use this for filtering.
@@ -123,7 +123,7 @@
     - snakemake script: `scripts/eqtls/metabrain/sig_pairs/process_metabrain.smk`
     - check script `scripts/eqtls/metabrain/sig_pairs/run_process_metabrain.sh` for how to run the snakemake script and follow-up steps
 
-### full sumstat for coloc/LAVA
+### full_sumstats
 - Processing steps: 
     - snakemake script: `scripts/eqtls/metabrain/full_sumstats/process_metabrain.smk`
     - check script `scripts/eqtls/metabrain/full_sumstats/run_process_metabrain.sh` for how to run the snakemake script and follow-up steps
@@ -177,11 +177,11 @@ python format_snp_pos.py ${i}
 done
 ```
 
-### full sumstat for coloc/LAVA
+### full_sumstats
 - snakemake script: `scripts/sceqtls/bryois2022Brain/full_sumstats/format_full_sumstat.smk`
 - check script `scripts/sceqtls/bryois2022Brain/full_sumstats/run.sh` for how to run the snakemake script and follow-up steps
 
-### significant variant-gene pairs for qtl mapping
+### sig_pairs
 - snakemake script: `scripts/sceqtls/bryois2022Brain/sig_pairs/process.smk`
 - check script `scripts/sceqtls/bryois2022Brain/sig_pairs/run.sh` for how to run the snakemake script and follow-up steps
 - rename `OPCs...COPs` to `OPCs`
@@ -206,10 +206,12 @@ ENSG00000187961 1_662622_G_A    0.05892174837573025     -0.16135667326680556    
 - The file does not have MAF. coloc can be implemented with beta and se (or slope and se) and sdY (and not MAF), but will need to modify the code a bit. Source: https://github.com/chr1swallace/coloc/issues/178
     - Because the implementation of coloc without MAF requires some code change on the functionalities, this will be saved for FUMA releave version 2.0.x. 
     - For intiial release of FUMA version 2.0.0, singlebrain datasets can only be run with LAVA. 
-### significant variant-gene pairs for qtl mapping
-### full sumstat for LAVA
+
+### full_sumstats
 - Overview of the data: 
     - coordinates in GRCh38
 
 - snakemake script: `scripts/sceqtls/singlebrain/full_sumstats/format.smk`
 - check script `` for how to run the snakemake script and follow-up steps
+
+### sig_pairs
