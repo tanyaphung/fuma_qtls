@@ -177,14 +177,14 @@ python format_snp_pos.py ${i}
 done
 ```
 
-- Processing steps for full sumstats:
-    - snakemake script: `scripts/sceqtls/bryois2022Brain/full_sumstats/format_full_sumstat.smk`
-    - check script `scripts/sceqtls/bryois2022Brain/full_sumstats/run.sh` for how to run the snakemake script and follow-up steps
+### full sumstat for coloc/LAVA
+- snakemake script: `scripts/sceqtls/bryois2022Brain/full_sumstats/format_full_sumstat.smk`
+- check script `scripts/sceqtls/bryois2022Brain/full_sumstats/run.sh` for how to run the snakemake script and follow-up steps
 
-- Processing steps for significant variant-gene pairs: 
-    - snakemake script: `scripts/sceqtls/bryois2022Brain/sig_pairs/process.smk`
-    - check script `scripts/sceqtls/bryois2022Brain/sig_pairs/run.sh` for how to run the snakemake script and follow-up steps
-    - rename `OPCs...COPs` to `OPCs`
+### significant variant-gene pairs for qtl mapping
+- snakemake script: `scripts/sceqtls/bryois2022Brain/sig_pairs/process.smk`
+- check script `scripts/sceqtls/bryois2022Brain/sig_pairs/run.sh` for how to run the snakemake script and follow-up steps
+- rename `OPCs...COPs` to `OPCs`
 
 ## jerber2021Dopaminergic
 - Download data (eqtl_summary_stats.tar.gz) from: https://zenodo.org/records/4333872
