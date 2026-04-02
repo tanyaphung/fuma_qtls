@@ -212,6 +212,6 @@ ENSG00000187961 1_662622_G_A    0.05892174837573025     -0.16135667326680556    
     - coordinates in GRCh38
 
 - snakemake script: `scripts/sceqtls/singlebrain/full_sumstats/format.smk`
-- check script `` for how to run the snakemake script and follow-up steps
+- check script `scripts/sceqtls/singlebrain/full_sumstats/run.sh` for how to run the snakemake script and follow-up steps
 
 ### sig_pairs
