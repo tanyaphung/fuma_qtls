@@ -231,6 +231,38 @@ ENSG00000187961 1_662622_G_A    0.05892174837573025     -0.16135667326680556    
 - snakemake script: `scripts/sceqtls/singlebrain/sig_pairs/process.smk`
 - check script `scripts/sceqtls/singlebrain/sig_pairs/run.sh` for how to run the snakemake script and follow-up steps
 
+## brainscope
+### sig_pairs
+- Download the file `sig_QTLs.zip` from https://brainscope.gersteinlab.org/output-sig-eQTL.html
+- From the supplementary information of the paper https://www.science.org/doi/10.1126/science.adi5199, this is the column header: 
+
+```
+Each set of QTLs contains one file per cell type, with columns (in order) given as:
+35
+1. The common gene name associated with the eGene
+2. The gene chromosome
+3. Start position of the gene
+4. Start position of the gene (provided again as output from the software)
+5. The gene strand
+6. The number variants in the cis window for this gene
+7. The distance between the variant and the gene start position
+8. The variant ID
+9. The variant chromosome
+10. The start position of the variant
+11. The start position of the variant (provided again as output from the software)
+12. The nominal p-value of the association between the variant and the gene
+13. The r2 of the linear regression
+14. The beta (slope) of the linear regression
+15. Indicator variable denoting whether this variant was the best hit for this gene
+```
+
+- I could not find information on the genome build but spot checking indicates that the positions are in GRCh38: 
+    - https://gnomad.broadinstitute.org/variant/1-8358590-T-C?dataset=gnomad_r4
+    - https://gnomad.broadinstitute.org/variant/22-45413096-G-A?dataset=gnomad_r4
+
+- snakemake script: `scripts/sceqtls/brainscope/sig_pairs/process.smk`
+- check script `scripts/sceqtls/brainscope/sig_pairs/run.sh` for how to run the snakemake script and follow-up steps
+
 # sQTLs (splice QLTs)
 ## gtex_v10
 ### full_sumstats
